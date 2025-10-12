@@ -15,7 +15,7 @@ class Brand extends Model
         'thumbnail'
     ];
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 

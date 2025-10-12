@@ -13,6 +13,7 @@ class BrandFactory extends Factory
     {
         return [
             'title' => fake()->company(),
+            'thumbnail' => '',
         ];
     }
 }
