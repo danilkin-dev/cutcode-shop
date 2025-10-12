@@ -16,7 +16,7 @@ class ProductFactory extends Factory
             'title' => ucfirst(fake()->words(2, true)),
             'thumbnail' => '',
             'price' => fake()->numberBetween(1000, 100000),
-            'brand_id' => Brand::query()->isRandomOrder()->value('id'),
+            'brand_id' => Brand::inRandomOrder()->value('id'),
         ];
     }
 }
