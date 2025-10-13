@@ -9,17 +9,11 @@ use Illuminate\Support\Facades\RateLimiter;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         RateLimiter::for('web', function (Request $request) {

@@ -12,33 +12,34 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        Model::preventLazyLoading(!app()->isProduction());
-        Model::preventSilentlyDiscardingAttributes(!app()->isProduction());
+        Model::shouldBeStrict(!app()->isProduction());
 
-        DB::whenQueryingForLongerThan(500, function (Connection $connection) {
-            Log::debug('whenQueryingForLongerThan:' . $connection->query()->toSql());
-        });
+        if(app()->isProduction()) {
+            DB::whenQueryingForLongerThan(CarbonInterval::seconds(5), function (Connection $connection) {
+                Log::debug('whenQueryingForLongerThan:' . $connection->totalQueryDuration());
+            });
 
-        $kernel = app(Kernel::class);
+            DB::listen(function ($query) {
+                if ($query->time > 100) {
+                    Log::debug('Slow Query (' . $query->time . ' ms): ' . $query->sql, $query->bindings);
+                }
+            });
 
-        $kernel->whenRequestLifecycleIsLongerThan(
-            CarbonInterval::seconds(4),
-            function () {
-                Log::debug('whenRequestLifecycleIsLongerThan:' . request()->url);
-            }
-        );
+            $kernel = app(Kernel::class);
+
+            $kernel->whenRequestLifecycleIsLongerThan(
+                CarbonInterval::seconds(4),
+                function () {
+                    Log::debug('whenRequestLifecycleIsLongerThan:' . request()->url);
+                }
+            );
+        }
     }
 }
