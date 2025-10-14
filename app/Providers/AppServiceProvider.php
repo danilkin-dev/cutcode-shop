@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Carbon\CarbonInterval;
-use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Support\Facades\DB;
@@ -21,20 +20,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::shouldBeStrict(!app()->isProduction());
 
-        if(app()->isProduction()) {
-            DB::whenQueryingForLongerThan(CarbonInterval::seconds(5), function (Connection $connection) {
-                Log::debug('whenQueryingForLongerThan:' . $connection->totalQueryDuration());
-            });
-
+        if (app()->isProduction()) {
             DB::listen(function ($query) {
                 if ($query->time > 100) {
                     Log::debug('Slow Query (' . $query->time . ' ms): ' . $query->sql, $query->bindings);
                 }
             });
 
-            $kernel = app(Kernel::class);
-
-            $kernel->whenRequestLifecycleIsLongerThan(
+            app(Kernel::class)->whenRequestLifecycleIsLongerThan(
                 CarbonInterval::seconds(4),
                 function () {
                     Log::debug('whenRequestLifecycleIsLongerThan:' . request()->url);

@@ -13,7 +13,7 @@ class Brand extends Model
     protected $fillable = [
         'slug',
         'title',
-        'thumbnail'
+        'thumbnail',
     ];
 
     protected static function boot(): void
