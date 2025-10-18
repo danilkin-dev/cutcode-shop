@@ -24,7 +24,6 @@ trait HasSlug
 
             $this->{$this->slugColumn()} = $slug;
         }
-
     }
 
     protected function slugColumn(): string
@@ -46,7 +45,7 @@ trait HasSlug
         while ($this->isSlugExists($slug)) {
             $i++;
 
-            $slug = $originalSlug.'-'.$i;
+            $slug = $originalSlug . '-' . $i;
         }
 
         return $slug;
