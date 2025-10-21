@@ -1,6 +1,9 @@
 # Installation
 
 ```bash
+# Установить зависимости
+composer install
+
 # Запустить контейнеры
 sail up -d
 

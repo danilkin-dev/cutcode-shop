@@ -3,7 +3,7 @@
 @section('title', 'Забыли пароль')
 
 @section('content')
-    <x-forms.auth-forms title="Забыли пароль" action="{{ route('password.email') }}" method="POST">
+    <x-forms.auth-forms title="Забыли пароль" action="{{ route('forgot.handle') }}" method="POST">
         @csrf
 
         <x-forms.text-input name="email" type="email" placeholder="E-mail" required :isError="$errors->has('email')" />
@@ -18,7 +18,7 @@
             <div class="space-y-3 mt-5">
                 <div class="text-xxs md:text-xs"><a href="{{ route('login') }}"
                         class="text-white hover:text-white/70 font-bold">Авторизация</a></div>
-                <div class="text-xxs md:text-xs"><a href="{{ route('signUp') }}"
+                <div class="text-xxs md:text-xs"><a href="{{ route('register') }}"
                         class="text-white hover:text-white/70 font-bold">Регистрация</a></div>
             </div>
         </x-slot:buttons>
