@@ -28,13 +28,13 @@ class SocialAuthController extends Controller
             throw new DomainException('Драйвер не поддерживается');
         }
 
-        $user = Socialite::driver($driver)->user();
+        $socialUser = Socialite::driver($driver)->user();
 
         $user = User::updateOrCreate([
-            $driver . '_id' => $user->id,
+            $driver . '_id' => $socialUser->getId(),
         ], [
-            'name' => $user->name ?? $user->email,
-            'email' => $user->email,
+            'name' => $socialUser->getName() ?? $socialUser->getEmail(),
+            'email' => $socialUser->getEmail(),
             'password' => bcrypt(str()->random(20)),
         ]);
 

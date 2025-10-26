@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers;
+namespace Tests\Feature\App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\SignInController;
 use App\Http\Requests\SignInFormRequest;
@@ -22,7 +22,7 @@ class SignInControllerTest extends TestCase
 
     public function test_it_handle_success(): void
     {
-        $password = '12345678';
+        $password = '123456789';
 
         $user = UserFactory::new()->create([
             'email' => 'testing@cutcode.ru',
@@ -34,15 +34,25 @@ class SignInControllerTest extends TestCase
             'password' => $password,
         ]);
 
-        $response = $this->post(
-            action([SignInController::class, 'handle']),
-            $request
-        );
+        $response = $this->post(action([SignInController::class, 'handle']), $request);
 
         $response->assertValid()
             ->assertRedirect(route('home'));
 
         $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_it_handle_fail(): void
+    {
+        $request = SignInFormRequest::factory()->create([
+            'email' => 'notfound@cutcode.ru',
+            'password' => str()->random(10),
+        ]);
+
+        $this->post(action([SignInController::class, 'handle']), $request)
+            ->assertInvalid(['email']);
+
+        $this->assertGuest();
     }
 
     public function test_it_logout_success(): void
@@ -54,6 +64,13 @@ class SignInControllerTest extends TestCase
         $this->actingAs($user)
             ->delete(action([SignInController::class, 'logout']));
 
+
         $this->assertGuest();
+    }
+
+    public function test_it_logout_guest_middleware_fail(): void
+    {
+        $this->delete(action([SignInController::class, 'logout']))
+            ->assertRedirect(route('home'));
     }
 }
