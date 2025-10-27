@@ -11,7 +11,7 @@ class NewUserDTOTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_instance_created_from_form_request()
+    public function test_it_instance_created_from_form_request(): void
     {
         $dto = NewUserDTO::fromRequest(new SignUpFormRequest([
             'name' => 'test',
