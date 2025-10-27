@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Support\Casts\PriceCast;
 use Support\Traits\Models\HasSlug;
 use Support\Traits\Models\HasThumbnail;
 
@@ -28,6 +29,10 @@ class Product extends Model
         'sorting',
     ];
 
+    protected $casts = [
+        'price' => PriceCast::class,
+    ];
+
     protected function thumbnailDir(): string
     {
         return 'products';
@@ -37,7 +42,7 @@ class Product extends Model
     {
         return $query->where('on_home_page', true)
             ->orderBy('sorting')
-            ->limit(6);
+            ->limit(8);
     }
 
     public function brand(): BelongsTo

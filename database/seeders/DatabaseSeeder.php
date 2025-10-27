@@ -3,17 +3,18 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use Domain\Catalog\Models\Brand;
-use Domain\Catalog\Models\Category;
+use Database\Factories\BrandFactory;
+use Database\Factories\CategoryFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        Brand::factory(20)->create();
+        BrandFactory::new()->count(20)
+            ->create();
 
-        Category::factory(10)
+        CategoryFactory::new()->count(count: 10)
             ->has(Product::factory(rand(5, 15)))
             ->create();
     }
