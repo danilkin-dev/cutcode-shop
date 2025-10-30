@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('slug')->unique();
             $table->string('title');
+            $table->string('text')->nullable();
             $table->string('thumbnail')->nullable();
             $table->unsignedInteger('price')->default(0);
             $table->boolean('on_home_page')->default(false);
@@ -24,6 +25,7 @@ return new class () extends Migration {
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
+            $table->fullText(['title', 'text']);
 
             $table->timestamps();
         });

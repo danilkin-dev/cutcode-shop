@@ -13,7 +13,8 @@ final class AppRegistrar implements RouteRegistrar
     public function map(Registrar $router): void
     {
         Route::middleware(['throttle:web', 'web'])->group(function () {
-            Route::get('/', HomeController::class)->name('home');
+            Route::get('/', HomeController::class)
+                ->name('home');
 
             Route::get('storage/images/{dir}/{method}/{size}/{file}', ThumbnailController::class)
                 ->where('method', 'resize|crop|fit')
