@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->unsignedInteger('price')->default(0);
             $table->boolean('on_home_page')->default(false);
             $table->integer('sorting')->default(999);
+            $table->json('json_properties')->nullable();
 
             $table->foreignIdFor(Brand::class)
                 ->nullable()
