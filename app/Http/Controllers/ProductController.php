@@ -11,14 +11,15 @@ class ProductController extends Controller
     {
         $product->load('optionValues.option');
 
-        if (!empty(session('viewed_products'))) {
+        $viewedProducts = collect();
+
+        if (session('viewed_products')) {
             $viewedProducts = Product::query()
                 ->whereIn('id', session('viewed_products'))
                 ->where('id', '!=', $product->id)
                 ->limit(10)
                 ->get();
         }
-
 
         $options = $product->optionValues->mapToGroups(function ($item) {
             return [$item->option->title => $item];
