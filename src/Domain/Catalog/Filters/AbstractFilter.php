@@ -7,11 +7,9 @@ use Stringable;
 
 abstract class AbstractFilter implements Stringable
 {
-    public function __invoke(Builder $query, $next): void
+    public function __invoke(Builder $query, $next): mixed
     {
-        $this->apply($query);
-
-        $next($query);
+        return $next($this->apply($query));
     }
 
     abstract public function title(): string;

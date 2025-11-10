@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use Domain\Product\Models\Product;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -21,15 +21,11 @@ class ProductController extends Controller
                 ->get();
         }
 
-        $options = $product->optionValues->mapToGroups(function ($item) {
-            return [$item->option->title => $item];
-        });
-
         session()->put('viewed_products.' . $product->id, $product->id);
 
         return view('product.show', [
             'product' => $product,
-            'options' => $options,
+            'options' => $product->optionValues->keyValues(),
             'viewedProducts' => $viewedProducts,
         ]);
     }

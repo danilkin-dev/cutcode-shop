@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class CategoryQueryBuilder extends Builder
 {
-    public function homePage(): Builder
+    public function homePage(): CategoryQueryBuilder
     {
         return $this->select(['id', 'title', 'slug'])
             ->where('on_home_page', true)
