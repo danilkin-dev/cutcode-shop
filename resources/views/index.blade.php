@@ -38,7 +38,7 @@
         </div>
     </section>
 
-    @if (count($categories))
+    @if ($categories->isNotEmpty())
         <section class="mt-16 lg:mt-24">
             <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Категории</h2>
@@ -50,7 +50,7 @@
         </section>
     @endif
 
-    @if (count($products))
+    @if ($products->isNotEmpty())
         <section class="mt-16 lg:mt-24">
             <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Каталог товаров</h2>
@@ -66,7 +66,7 @@
         </section>
     @endif
 
-    @if (count($brands))
+    @if ($brands->isNotEmpty())
         <section class="mt-20">
             <!-- Section heading -->
             <h2 class="text-lg lg:text-[42px] font-black">Бренды</h2>

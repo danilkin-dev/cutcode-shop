@@ -25,7 +25,7 @@ return new class () extends Migration {
                 ->cascadeOnUpdate();
 
             $table->integer('price');
-            $table->integer('quantity')->default(1);
+            $table->integer('quantity');
             $table->string('string_option_values')->nullable();
 
             $table->timestamps();
