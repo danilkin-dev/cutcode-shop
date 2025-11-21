@@ -40,6 +40,8 @@ class SocialAuthController extends Controller
 
         Auth::login($user);
 
+        request()->session()->regenerate();
+
         return redirect()
             ->intended(route('home'));
     }
