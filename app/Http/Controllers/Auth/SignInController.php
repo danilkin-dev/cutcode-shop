@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Support\SessionRegenerator;
 
 class SignInController extends Controller
 {
@@ -18,24 +19,22 @@ class SignInController extends Controller
 
     public function handle(SignInFormRequest $request): RedirectResponse
     {
-        if (!Auth::attempt($request->validated())) {
+        if (!Auth::once($request->validated())) {
             return back()->withErrors([
                 'email' => 'Неверный логин или пароль',
             ])->onlyInput('email');
         }
 
-        $request->session()->regenerate();
+        SessionRegenerator::run(fn () => Auth::login(
+            Auth::user()
+        ));
 
         return redirect()->intended(route('home'));
     }
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
+        SessionRegenerator::run(fn () => Auth::logout());
 
         return redirect()->route('home');
     }
