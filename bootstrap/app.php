@@ -20,6 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (DomainException $e) {
             flash()->alert($e->getMessage());
 
-            return redirect()->back();
+            return session()->previousUri()
+                ? redirect()->back()
+                : redirect()->route('home');
         });
     })->create();

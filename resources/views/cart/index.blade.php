@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', $category->title ?? 'Корзина')
+@section('title', 'Корзина')
 
 @section('content')
     <ul class="breadcrumbs flex flex-wrap gap-y-1 gap-x-4 mb-6">
         <li><a href="{{ route('home') }}" class="text-body hover:text-pink text-xs">Главная</a></li>
-        <li><a href="{{ route('cart') }}" class="text-body hover:text-pink text-xs">Корзина</a></li>
+        <li><span class="text-body text-xs">Корзина</span></li>
     </ul>
 
     <section>
@@ -14,7 +14,7 @@
 
         @if ($items->isEmpty())
             <!-- Message -->
-            <div class="lg:hidden py-3 px-6 rounded-lg bg-pink text-white">Корзина пуста</div>
+            <div class="py-3 px-6 rounded-lg bg-pink text-white">Корзина пуста</div>
         @else
             <!-- Message -->
             <div class="lg:hidden py-3 px-6 rounded-lg bg-pink text-white">Таблицу можно пролистать вправо →</div>
@@ -96,7 +96,7 @@
                 </form>
                 <div class="flex flex-col sm:flex-row lg:justify-end gap-4">
                     <a href="{{ route('catalog') }}" class="btn btn-pink">За покупками</a>
-                    <a href="#" class="btn btn-purple">Оформить заказ</a>
+                    <a href="{{ route('order') }}" class="btn btn-purple">Оформить заказ</a>
                 </div>
             </div>
         @endif

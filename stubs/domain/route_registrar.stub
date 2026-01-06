@@ -12,7 +12,7 @@ final class {{Domain}}Registrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
-        Route::middleware('web')->group(function () {
+        Route::middleware(['throttle:web', 'web'])->group(function () {
 
         });
     }

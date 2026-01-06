@@ -13,6 +13,7 @@ chmod -R +x .githooks
 
 # Инициализировать приложение
 sail artisan app:install
+sail npm run dev
 ```
 
 # Deployments
