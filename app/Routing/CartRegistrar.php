@@ -11,7 +11,7 @@ final class CartRegistrar implements RouteRegistrar
 {
     public function map(Registrar $registrar): void
     {
-        Route::middleware(['throttle:web', 'web'])->group(function () {
+        Route::middleware(['throttle:web', 'web', 'seo'])->group(function () {
             Route::controller(CartController::class)
                 ->prefix('cart')
                 ->group(function () {

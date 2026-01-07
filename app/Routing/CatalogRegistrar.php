@@ -12,7 +12,7 @@ final class CatalogRegistrar implements RouteRegistrar
 {
     public function map(Registrar $router): void
     {
-        Route::middleware(['throttle:web', 'web'])->group(function () {
+        Route::middleware(['throttle:web', 'web', 'seo'])->group(function () {
             Route::get('/catalog/{category:slug?}', CatalogController::class)
                 ->middleware([CatalogViewMiddleware::class])
                 ->name('catalog');

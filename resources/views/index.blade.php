@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $seo_title ?? 'Главная')
+
 @section('content')
     <section>
         <!-- Section heading -->

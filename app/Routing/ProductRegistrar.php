@@ -11,7 +11,7 @@ final class ProductRegistrar implements RouteRegistrar
 {
     public function map(Registrar $router): void
     {
-        Route::middleware(['throttle:web', 'web'])->group(function () {
+        Route::middleware(['throttle:web', 'web', 'seo'])->group(function () {
             Route::get('/product/{product:slug}', ProductController::class)
                 ->name('product');
         });

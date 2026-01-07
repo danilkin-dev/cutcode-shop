@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Оформление заказа')
+@section('title', $seo_title ?? 'Оформление заказа')
 
 @section('content')
     <ul class="breadcrumbs flex flex-wrap gap-y-1 gap-x-4 mb-6">

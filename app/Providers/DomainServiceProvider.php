@@ -14,6 +14,10 @@ class DomainServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(
+            \Domain\Seo\Providers\SeoServiceProvider::class
+        );
+
+        $this->app->register(
             OrderServiceProvider::class
         );
 
