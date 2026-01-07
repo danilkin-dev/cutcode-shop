@@ -12,23 +12,18 @@ final class NewOrderAction
     public function __invoke(NewOrderDTO $data): Order
     {
         if ($data->createAccount) {
-            $this->registerCustomer($data);
+            $register = app(RegisterNewUserContract::class);
+
+            $register(new NewUserDTO(
+                name: "{$data->firstName} {$data->lastName}",
+                email: $data->email,
+                password: $data->password,
+            ));
         }
 
         return Order::query()->create([
             'payment_method_id' => $data->paymentMethodId,
             'delivery_type_id' => $data->deliveryTypeId,
         ]);
-    }
-
-    private function registerCustomer(NewOrderDTO $data): void
-    {
-        $register = app(RegisterNewUserContract::class);
-
-        $register(new NewUserDTO(
-            name: "{$data->firstName} {$data->lastName}",
-            email: $data->email,
-            password: $data->password,
-        ));
     }
 }

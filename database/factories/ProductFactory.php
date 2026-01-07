@@ -23,6 +23,7 @@ class ProductFactory extends Factory
             'brand_id' => Brand::inRandomOrder()->value('id'),
             'on_home_page' => $this->faker->boolean(),
             'sorting' => $this->faker->numberBetween(1, 999),
+            'quantity' => $this->faker->numberBetween(0, 20),
         ];
     }
 }

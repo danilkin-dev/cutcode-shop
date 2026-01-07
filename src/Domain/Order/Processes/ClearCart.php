@@ -1,0 +1,16 @@
+<?php
+
+namespace Domain\Order\Processes;
+
+use Domain\Order\Contacts\OrderProcessContract;
+use Domain\Order\Models\Order;
+
+final class ClearCart implements OrderProcessContract
+{
+    public function handle(Order $order, $next)
+    {
+        cart()->truncate();
+
+        return $next($order);
+    }
+}

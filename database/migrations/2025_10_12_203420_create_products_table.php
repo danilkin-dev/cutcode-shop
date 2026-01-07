@@ -28,6 +28,8 @@ return new class () extends Migration {
                 ->nullOnDelete();
             $table->fullText(['title', 'text']);
 
+            $table->unsignedInteger('quantity')->default(0);
+
             $table->timestamps();
         });
 

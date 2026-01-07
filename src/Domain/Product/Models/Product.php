@@ -3,16 +3,13 @@
 namespace Domain\Product\Models;
 
 use App\Jobs\ProductJsonProperties;
-
 use Domain\Catalog\Models\Brand;
 use Domain\Catalog\Models\Category;
 use Domain\Product\QueryBuilders\ProductQueryBuilder;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
 use Support\Casts\PriceCast;
@@ -36,6 +33,7 @@ class Product extends Model
         'on_home_page',
         'sorting',
         'json_properties',
+        'quantity',
     ];
 
     protected $casts = [
