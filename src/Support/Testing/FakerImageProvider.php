@@ -22,7 +22,7 @@ final class FakerImageProvider extends Base
             false
         );
 
-        return '/storage/images/' . trim($storageDir, '/') . '/' . $file;
+        return trim($storageDir, '/') . '/' . $file;
     }
 
     public function aiImage(string $storageDir, int $width = 500, int $height = 500, string $prompt): string

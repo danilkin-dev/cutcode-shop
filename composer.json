@@ -16,6 +16,9 @@
         "laravel/socialite": "^5.23",
         "laravel/telescope": "^5.14",
         "laravel/tinker": "^2.10.1",
+        "moonshine/moonshine": "^4.4",
+        "moonshine/ru": "^1.0",
+        "moonshine/telegram-mini-app": "^0.2.1",
         "spatie/laravel-model-states": "^2.12",
         "spatie/laravel-view-models": "^1.6",
         "yoomoney/yookassa-sdk-php": "*"

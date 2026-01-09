@@ -9,11 +9,24 @@ use Database\Factories\OptionValueFactory;
 use Database\Factories\ProductFactory;
 use Database\Factories\PropertyFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use MoonShine\Laravel\Models\MoonshineUser;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isLocal()) {
+            MoonshineUser::updateOrCreate(
+                ['email' => 'admin@dev.ru'],
+                [
+                    'moonshine_user_role_id' => 1,
+                    'name' => 'admin',
+                    'password' => Hash::make('admin'),
+                ]
+            );
+        }
+
         BrandFactory::new()->count(20)
             ->create();
 

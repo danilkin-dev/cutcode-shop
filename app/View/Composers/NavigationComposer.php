@@ -10,6 +10,10 @@ final class NavigationComposer
 {
     public function compose(View $view): void
     {
+        if (request()->is('admin*')) {
+            return;
+        }
+
         $menu = Menu::make()
             ->add(MenuItem::make(route('home'), 'Главная'))
             ->add(MenuItem::make(route('catalog'), 'Каталог'))

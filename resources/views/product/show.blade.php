@@ -17,7 +17,7 @@
 
                 <div class="basis-full lg:basis-2/5 xl:basis-2/4">
                     <div class="overflow-hidden h-auto max-h-[620px] lg:h-[480px] xl:h-[620px] rounded-3xl">
-                        <img src="{{ $product->makeThumbnail('354x354') }}" class="object-cover w-full h-full" alt="{{ $product->title }}">
+                        <img src="{{ $product->makeThumbnail('750x750') }}" class="object-cover w-full h-full" alt="{{ $product->title }}">
                     </div>
                 </div>
 
